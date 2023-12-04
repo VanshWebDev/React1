@@ -4,8 +4,7 @@ import Navbar from './componants/Navbar';
 import TextArea from './componants/TextArea';
 // import About from './componants/About';
 import { useState } from 'react';
-import About from './componants/About';
-import { BrowserRouter as Main, Route, Routes } from 'react-router-dom'
+// import { BrowserRouter as Main, Route, Routes } from 'react-router-dom'
 
 
 // testing 2 
@@ -45,17 +44,24 @@ function App() {
 
   return (
     <>
-      <Main>
-        <Navbar clicked={darkBtnClicked} textMode={mode} />
-
-        <Routes>
-          <Route exact path="/TextArea" element={<TextArea heading="Enter your case" save={save} textMode={mode} />} />
-          <Route exact path="/About" element={<About />} />
-        </Routes>
-
-        {/* <TextArea heading="Enter your case" save={save} textMode={mode} /> */}
-      </Main>
+      <Navbar clicked={darkBtnClicked} textMode={mode} />
+      <TextArea heading="Enter your case" save={save} textMode={mode} />
     </>
+
+
+    // <Main>
+    //   <>
+    //     <Navbar clicked={darkBtnClicked} textMode={mode} />
+    //     <Routes>
+    //       <Route
+    //       exact
+    //         path="/home"
+    //         element={<TextArea heading="Enter your case" save={save} textMode={mode} />}
+    //       />
+    //       <Route exact path="/about" element={<About />} />
+    //     </Routes>
+    //   </>
+    // </Main>
   );
 }
 
