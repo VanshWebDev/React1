@@ -1,24 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 export default function Textarea(props) {
-
-    const [text, setText] = useState("")
+    const detail = document.querySelector(".detail")
+    const [text, setText] = useState("");
     function upperCase() {
-        let newText = text.toUpperCase()
-        setText(newText)
+        let newText = text.toUpperCase();
+        setText(newText);
     }
     function lowerCase() {
-        let newText = text.toLowerCase()
-        setText(newText)
+        let newText = text.toLowerCase();
+        setText(newText);
     }
     function removeSpace() {
         let newText = text.split(/[ ]+/);
-        setText(newText.join(' '))
+        setText(newText.join(' '));
     }
     function copy() {
-        navigator.clipboard.writeText(text)
+        navigator.clipboard.writeText(text);
     }
     function paste() {
+        detail.innerHTML = `Characters: ${text.replace(/\s/g, '').length} Words: ${text.split(/\s+/).filter((word) => word !== '').length}`;
         navigator.clipboard.readText()
             .then((data) => {
                 // Append the pasted text to the existing text
@@ -30,13 +31,19 @@ export default function Textarea(props) {
 
     }
     function clear() {
-        setText("")
+        setText("");
+        detail.innerHTML="empty"
     }
 
 
     function textTracker(e) {
-        let inputText = e.target.value
+        let inputText = e.target.value;
         setText(inputText)
+
+        const charCount = inputText.replace(/\s/g, '').length;
+        const wordCount = inputText.split(/\s+/).filter((word) => word !== '').length;
+
+        document.querySelector(".detail").innerHTML = `Characters: ${charCount} Words: ${wordCount}`;
 
     }
 
@@ -53,7 +60,9 @@ export default function Textarea(props) {
                 <button type="button" className="btn btn-primary my-2 mx-2" onClick={paste}>Paste</button>
                 <button type="button" className="btn btn-danger my-2 mx-2" onClick={clear}>Clear</button>
             </div>
-
+            <div>
+                <p className={`detail text-${props.textMode}`}></p>
+            </div>
         </div>
     )
 }

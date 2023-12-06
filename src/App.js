@@ -1,10 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import Navbar from './componants/Navbar';
 import TextArea from './componants/TextArea';
-// import About from './componants/About';
+import About from './componants/About';
 import { useState } from 'react';
-// import { BrowserRouter as Main, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Main, Route, Routes } from 'react-router-dom'
 
 
 // testing 2 
@@ -21,9 +20,13 @@ function App() {
     localStorage.setItem(`text${c}`, text)
 
   }
-
+  function customColor(color) {
+    document.body.style.backgroundColor = color;
+    let a = document.querySelector(".navbar")
+    a.style.background = color;
+  }
   function darkBtnClicked() {
-    if (document.body.style.background == "black") {
+    if (document.body.style.background === "black") {
       document.body.style.background = "white"
       let a = document.querySelector(".navbar")
       a.style.background = "white"
@@ -43,25 +46,22 @@ function App() {
   }
 
   return (
-    <>
-      <Navbar clicked={darkBtnClicked} textMode={mode} />
-      <TextArea heading="Enter your case" save={save} textMode={mode} />
-    </>
 
 
-    // <Main>
-    //   <>
-    //     <Navbar clicked={darkBtnClicked} textMode={mode} />
-    //     <Routes>
-    //       <Route
-    //       exact
-    //         path="/home"
-    //         element={<TextArea heading="Enter your case" save={save} textMode={mode} />}
-    //       />
-    //       <Route exact path="/about" element={<About />} />
-    //     </Routes>
-    //   </>
-    // </Main>
+
+    <Main>
+      <>
+        <Navbar clicked={darkBtnClicked} textMode={mode} customColor={customColor} />
+        <Routes>
+          <Route
+            exact
+            path="/home"
+            element={<TextArea heading="Enter your case" save={save} textMode={mode} />}
+          />
+          <Route exact path="/about" element={<About textMode={mode} />} />
+        </Routes>
+      </>
+    </Main>
   );
 }
 
