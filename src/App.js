@@ -47,8 +47,6 @@ function App() {
 
   return (
 
-
-
     <Main>
       <>
         <Navbar clicked={darkBtnClicked} textMode={mode} customColor={customColor} />
